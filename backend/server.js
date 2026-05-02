@@ -1,13 +1,27 @@
+require("dotenv").config(); // MUST be first
+
 const express = require("express");
+const cors = require("cors");
+const connectDB = require("./config/db");
+
+// Connect to database
+connectDB();
 
 const app = express();
 
+// Middleware
 app.use(express.json());
+app.use(cors());
 
+// Test route
 app.get("/", (req, res) => {
-  res.send("MindVault API Running");
+res.send("MindVault API Running");
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+// Port setup
+const PORT = process.env.PORT || 5000;
+
+// Start server
+app.listen(PORT, () => {
+console.log(`Server running on port ${PORT}`);
 });
